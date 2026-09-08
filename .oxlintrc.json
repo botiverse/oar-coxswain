@@ -1,0 +1,134 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "oxc",
+    "promise",
+    "import"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "error",
+    "perf": "error",
+    "style": "error"
+  },
+  "rules": {
+    "typescript/consistent-type-assertions": [
+      "error",
+      {
+        "assertionStyle": "never"
+      }
+    ],
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
+    "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/await-thenable": "error",
+    "typescript/no-unsafe-argument": "error",
+    "typescript/no-unsafe-assignment": "error",
+    "typescript/no-unsafe-call": "error",
+    "typescript/no-unsafe-member-access": "error",
+    "typescript/no-unsafe-return": "error",
+    "typescript/no-unsafe-type-assertion": "error",
+    "typescript/no-unnecessary-type-conversion": "error",
+    "typescript/restrict-plus-operands": "error",
+    "typescript/restrict-template-expressions": "error",
+    "typescript/prefer-readonly-parameter-types": "off",
+    "eslint/sort-keys": "off",
+    "unicorn/switch-case-braces": "off",
+    "import/no-named-export": "off",
+    "eslint/no-ternary": "off",
+    "eslint/no-magic-numbers": "off",
+    "eslint/func-style": "off",
+    "eslint/no-undefined": "off",
+    "typescript/method-signature-style": "off",
+    "import/group-exports": "off",
+    "typescript/parameter-properties": "off",
+    "import/exports-last": "off",
+    "unicorn/no-null": "off",
+    "eslint/capitalized-comments": "off",
+    "typescript/switch-exhaustiveness-check": "error",
+    "typescript/no-unnecessary-condition": "error",
+    "typescript/strict-boolean-expressions": "error",
+    "typescript/no-confusing-void-expression": "error",
+    "typescript/prefer-nullish-coalescing": "error",
+    "typescript/explicit-function-return-type": "error",
+    "typescript/no-unnecessary-type-parameters": "error",
+    "typescript/promise-function-async": "error",
+    "typescript/require-await": "error",
+    "typescript/no-base-to-string": "error",
+    "typescript/no-meaningless-void-operator": "error",
+    "typescript/prefer-reduce-type-parameter": "error",
+    "typescript/no-redundant-type-constituents": "error",
+    "typescript/no-duplicate-type-constituents": "error",
+    "typescript/consistent-type-exports": "error",
+    "eslint/id-length": "off",
+    "eslint/no-inline-comments": "off",
+    "eslint/one-var": "off"
+  },
+  "overrides": [
+    {
+      "files": [
+        "**"
+      ],
+      "rules": {
+        "eslint/max-lines": "off",
+        "eslint/max-lines-per-function": "off",
+        "eslint/max-params": "off",
+        "eslint/max-statements": "off",
+        "eslint/no-nested-ternary": "off",
+        "eslint/no-await-in-loop": "off",
+        "eslint/no-negated-condition": "off",
+        "eslint/prefer-destructuring": "off",
+        "eslint/require-await": "off",
+        "eslint/sort-imports": "off",
+        "import/consistent-type-specifier-style": "off",
+        "import/no-nodejs-modules": "off",
+        "import/no-unassigned-import": "off",
+        "import/prefer-default-export": "off",
+        "promise/always-return": "off",
+        "promise/avoid-new": "off",
+        "promise/prefer-await-to-then": "off",
+        "promise/prefer-await-to-callbacks": "off",
+        "typescript/require-await": "off",
+        "unicorn/no-negated-condition": "off",
+        "unicorn/no-nested-ternary": "off",
+        "unicorn/prefer-global-this": "off",
+        "unicorn/prefer-top-level-await": "off",
+        "unicorn/prefer-ternary": "off"
+      }
+    },
+    {
+      "files": [
+        "experiments/**"
+      ],
+      "rules": {
+        "import/no-nodejs-modules": "off",
+        "eslint/max-statements": "off",
+        "eslint/max-lines": "off",
+        "eslint/max-lines-per-function": "off",
+        "import/prefer-default-export": "off",
+        "eslint/sort-imports": "off",
+        "import/consistent-type-specifier-style": "off"
+      }
+    },
+    {
+      "files": [
+        "**/*.test.ts"
+      ],
+      "rules": {
+        "import/no-nodejs-modules": "off",
+        "typescript/no-floating-promises": "off",
+        "eslint/require-await": "off",
+        "typescript/require-await": "off",
+        "eslint/sort-imports": "off",
+        "import/consistent-type-specifier-style": "off",
+        "unicorn/no-useless-undefined": "off",
+        "typescript/explicit-function-return-type": "off"
+      }
+    }
+  ]
+}

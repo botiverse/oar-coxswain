@@ -1,30 +1,45 @@
 {
-  "name": "@botiverse/coxswain",
-  "private": true,
+  "name": "@botiverse/oar-coxswain",
   "version": "0.0.1",
-  "description": "oar dogfood cockpit — fleet lanes and live voyage capture",
+  "private": true,
+  "description": "oar dogfood cockpit \u2014 fleet lanes and live voyage capture",
   "type": "module",
   "main": "./out/main/index.cjs",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/botiverse/oar-coxswain.git"
+  },
   "scripts": {
-    "build": "pnpm --filter @botiverse/oar build && electron-vite build",
+    "build": "electron-vite build",
     "check": "pnpm run typecheck && pnpm run lint",
-    "dev": "pnpm --filter @botiverse/oar build && electron-vite dev",
-    "lint": "oxlint --type-aware --deny-warnings src test/*.ts electron.vite.config.ts vitest.config.ts",
+    "dev": "electron-vite dev",
+    "lint": "oxlint --type-aware --deny-warnings src test/*.ts experiments electron.vite.config.ts vitest.config.ts",
     "smoke": "electron --no-sandbox --disable-gpu --disable-dev-shm-usage test/smoke.cjs",
     "test": "vitest run --config vitest.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@botiverse/oar": "workspace:*",
+    "@botiverse/oar": "^0.0.9",
     "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.2.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^5.2.0",
     "electron": "^43.4.1",
     "electron-vite": "^5.0.0",
+    "oxlint": "^1.79.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tailwindcss": "^4.3.3",
-    "vite": "^7.3.6"
+    "tsx": "^4.23.12",
+    "typescript": "~6.0.3",
+    "vite": "^7.3.6",
+    "vitest": "^4.1.11"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "engines": {
+    "node": ">=24.0.0"
   }
 }

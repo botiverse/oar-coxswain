@@ -1,6 +1,7 @@
-# coxswain
+# oar-coxswain
 
-An intentionally small Electron cockpit for dogfooding `@botiverse/oar`.
+An intentionally small Electron cockpit for dogfooding
+[`@botiverse/oar`](https://github.com/botiverse/oar).
 Each window owns an `AgentHost` that can run one or more independent session
 lanes. Humans inject through `prompt` or `steerOrQueue`, while agent replies
 enter the conversation only through the temporary `say` CLI. Every lane has a
@@ -17,10 +18,21 @@ expansion.
 Where the cockpit is headed — the ambitious dogfooding-and-verification
 feature set and its build order — lives in [`ROADMAP.md`](ROADMAP.md).
 
+## Relationship to oar
+
+This repository consumes the published `@botiverse/oar` package from npm; it is
+not part of the oar workspace. oar is a devDependency on purpose: it ships
+ESM-only, and the main/preload bundles are CommonJS, so electron-vite must
+bundle it into `out/` rather than externalize it as a runtime `require`. When the cockpit exposes a gap in oar, fix and
+release oar first, then bump the dependency here. For local iteration against
+an unreleased oar checkout, `pnpm link ../oar/packages/oar` (after building it)
+and unlink before committing; CI only knows the published version.
+
 ## Run
 
 ```sh
-pnpm --filter @botiverse/coxswain dev
+pnpm install
+pnpm dev
 ```
 
 Choose an available runtime, optionally provide its native model identifier,
@@ -53,19 +65,26 @@ vendor-native raw output and debug logs remain separate concerns.
 ## Checks
 
 ```sh
-pnpm --filter @botiverse/coxswain check
-pnpm --filter @botiverse/coxswain test
-pnpm --filter @botiverse/coxswain build
+pnpm check
+pnpm test
+pnpm build
 ```
+
+`pnpm check` (typecheck + oxlint) must be green before every commit.
 
 The deterministic screenshot smoke needs an X display on Linux and uses the
 CommonJS launcher documented in `design/README.md`:
 
 ```sh
-xvfb-run -a pnpm --filter @botiverse/coxswain smoke
+xvfb-run -a pnpm smoke
 ```
 
-The screenshot is written to `artifacts/coxswain-smoke.png`.
+The screenshot is written to `artifacts/coxswain-smoke.png`. CI runs the same
+sequence on Linux and uploads the screenshot as an artifact.
+
+`experiments/say-bridge.ts` is a manual, token-burning check that the `say`
+bridge delivers through the `OAR_SAY` indirection against a real runtime; run
+it with `pnpm tsx experiments/say-bridge.ts` and read its `OBSERVED` header.
 
 ## Manual dogfood path
 

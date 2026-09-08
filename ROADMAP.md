@@ -31,12 +31,12 @@ same way, does not belong here.
   the cockpit" to "failing test case in the repo" should be one action, not
   an afternoon of reconstruction.
 - **The smoke stays honest.** Every new view gets deterministic fixtures
-  and lands in the screenshot smoke (`xvfb-run -a pnpm --filter
-  @botiverse/coxswain smoke`), so the whole cockpit remains verifiable
+  and lands in the screenshot smoke (`xvfb-run -a pnpm smoke`), so the whole cockpit remains verifiable
   without a login.
-- **Work the repo's gate.** Everything here follows
-  [`docs/development.md`](../../docs/development.md): cheapest test kind
-  that can catch the mistake, `pnpm run check` green before every commit.
+- **Work the repo's gate.** Everything here follows oar's
+  [`docs/development.md`](https://github.com/botiverse/oar/blob/main/docs/development.md):
+  cheapest test kind that can catch the mistake, `pnpm run check` green
+  before every commit.
 
 ## The features
 
@@ -68,7 +68,7 @@ activity, and status lamp; lanes are individually steerable and abortable.
 A checker subscribed to each session's raw event stream that continuously
 asserts the stream-level invariants the spec promises (event ordering,
 turn attribution, terminal-outcome consistency, cursor monotonicity as the
-v2 record-stream contract lands — see [`docs/spec/`](../../docs/spec/README.md)).
+v2 record-stream contract lands — see [oar `docs/spec/`](https://github.com/botiverse/oar/tree/main/docs/spec)).
 Violations surface as a first-class alarm row in Activity, not a console
 warning.
 
