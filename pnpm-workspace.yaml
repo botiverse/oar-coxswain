@@ -3,3 +3,6 @@ allowBuilds:
   electron: true
   esbuild: true
   protobufjs: false
+# oar is our own package and is always consumed right after release.
+minimumReleaseAgeExclude:
+  - "@botiverse/oar"
