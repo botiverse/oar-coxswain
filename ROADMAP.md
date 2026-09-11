@@ -129,7 +129,7 @@ instead of folding everything into one flat timeline.
 - **First slice**: a tree panel driven from whatever parent/child signal
   the stream carries today, degrading gracefully to a single node.
 
-### 5. Usage helm — quota as an instrument, not a snapshot
+### 5. Usage helm — quota as an instrument, not a snapshot (first slice landed)
 
 Poll `accountUsage` around turn boundaries and show usage as motion:
 per-turn deltas, burn rate over the session, projected time-to-limit
@@ -140,8 +140,7 @@ against each window's reset.
 - **Verifies**: snapshot sanity over time (ratios move monotonically
   within a window, resets actually reset, `reauth_required` surfaces
   instead of garbage) — properties only observable across many reads.
-- **First slice**: usage read before/after each turn, delta shown on the
-  turn's outcome row.
+- **Landed first slice**: serialized public accountUsage reads with deltas, reset detection, burn rate, and conservative projections.
 
 ### 6. Drills — induced faults, promised behavior
 

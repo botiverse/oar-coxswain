@@ -127,3 +127,13 @@ it with `pnpm tsx experiments/say-bridge.ts` and read its `OBSERVED` header.
 4. Verify that messages emitted with `say` appear in the conversation.
 5. Send another input while the turn runs and inspect its steered/queued marker.
 6. Watch the status lamp follow the OAR observer, then abort the turn.
+
+## Usage helm first slice
+
+Each turn samples public `accountUsage` before and after completion. The
+renderer derives window deltas, reset markers, burn rate, and conservative
+projections; unsupported and reauth states remain explicit. Reads are
+serialized per lane and use only public OAR APIs.
+
+To capture fixture-only shareable PNG/MP4 artifacts, run `pnpm run showcase`.
+Artifacts are written to `artifacts/showcase/`.
