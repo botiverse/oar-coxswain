@@ -114,7 +114,7 @@ The screenshot is written to `artifacts/coxswain-smoke.png`. CI runs the same
 sequence on Linux and uploads the screenshot as an artifact.
 
 To make shareable fixture-only artifacts (a PNG plus a short MP4 assembled
-from deterministic #smoke frames), run this outside the commit check:
+from deterministic `#smoke` frames), run this outside the commit check:
 
 ```sh
 pnpm run showcase
@@ -154,5 +154,6 @@ Reads are serialized per lane. If a lane closes while a public usage promise is
 pending, close wins the observation race and emits an explicit error boundary
 when needed; the underlying runtime promise is left to settle on its own, so
 quota observation cannot hold disposal hostage. The feature uses only public OAR
-`accountUsage`; browser observe helpers use `@botiverse/oar/observe`, and lint
-rejects every other OAR deep path.
+`accountUsage` capability; no runtime internals or credentials cross the renderer boundary. Renderer-side observe helpers use the documented browser-safe
+`@botiverse/oar/observe` export; the lint rule rejects every other OAR deep path
+and direct source import.
