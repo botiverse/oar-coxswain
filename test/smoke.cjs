@@ -4,7 +4,7 @@
 const { execFileSync } = require("node:child_process");
 const path = require("node:path");
 
-const repositoryDirectory = path.resolve(__dirname, "..", "..");
+const repositoryDirectory = path.resolve(__dirname, "..");
 try {
   process.env.COXSWAIN_COMMIT ??= execFileSync(
     "git",

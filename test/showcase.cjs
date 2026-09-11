@@ -60,10 +60,10 @@ function repositoryCommit() {
 }
 
 if (!existsSync(path.join(appDirectory, "out", "main", "index.cjs"))) {
-  fail("Coxswain build output is missing; run `pnpm --filter @botiverse/coxswain build` first");
+  fail("Coxswain build output is missing; run `pnpm run build` first");
 }
 if (!existsSync(path.join(appDirectory, "out", "renderer", "index.html"))) {
-  fail("Coxswain renderer output is missing; run `pnpm --filter @botiverse/coxswain build` first");
+  fail("Coxswain renderer output is missing; run `pnpm run build` first");
 }
 
 const rootPath = path.parse(outputDirectory).root;
@@ -94,8 +94,8 @@ const smokeEnvironment = {
 };
 const smokeCommand = process.env.DISPLAY === undefined ? "xvfb-run" : "pnpm";
 const smokeArgs = process.env.DISPLAY === undefined
-  ? ["-a", "pnpm", "--filter", "@botiverse/coxswain", "smoke"]
-  : ["--filter", "@botiverse/coxswain", "smoke"];
+  ? ["-a", "pnpm", "run", "smoke"]
+  : ["run", "smoke"];
 run(smokeCommand, smokeArgs, smokeEnvironment);
 
 const frames = readdirSync(frameDirectory)
