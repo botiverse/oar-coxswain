@@ -67,7 +67,16 @@
     "typescript/consistent-type-exports": "error",
     "eslint/id-length": "off",
     "eslint/no-inline-comments": "off",
-    "eslint/one-var": "off"
+    "eslint/one-var": "off",
+    "eslint/no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          "@botiverse/oar/src/**",
+          "@botiverse/oar/dist/**"
+        ]
+      }
+    ]
   },
   "overrides": [
     {
