@@ -140,8 +140,8 @@ against each window's reset.
 - **Verifies**: snapshot sanity over time (ratios move monotonically
   within a window, resets actually reset, `reauth_required` surfaces
   instead of garbage) — properties only observable across many reads.
-- **Landed first slice**: serialized public accountUsage reads with deltas, reset detection, burn rate, and conservative projections.
-- **Deferred**: session-level burn-rate dashboard and historical trend retention remain future slices; the current view stays tied to each turn outcome.
+- **Landed first slice**: public `accountUsage` reads are serialized around prompted and spontaneous turn boundaries; outcome rows show per-window deltas, reset detection, burn rate, and conservative time-to-limit projections, while unsupported/reauth/unavailable/error states remain explicit. Deterministic Regatta smoke data covers the motion display.
+- **Deferred**: a session-level burn-rate dashboard and historical trend retention remain future slices; the current view deliberately stays tied to each turn outcome.
 
 ### 6. Drills — induced faults, promised behavior
 

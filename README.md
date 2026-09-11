@@ -127,15 +127,21 @@ it with `pnpm tsx experiments/say-bridge.ts` and read its `OBSERVED` header.
 4. Verify that messages emitted with `say` appear in the conversation.
 5. Send another input while the turn runs and inspect its steered/queued marker.
 6. Watch the status lamp follow the OAR observer, then abort the turn.
+7. On a completed turn, inspect the outcome row's Usage motion line: compare the per-window delta, burn rate, and reset/projection note with runtime account-usage readings. A runtime that reports no usage should say so explicitly rather than showing a fabricated zero.
 
 ## Usage helm first slice
 
-Each turn samples public `accountUsage` before and after completion. The
-renderer derives window deltas, reset markers, burn rate, and conservative
-projections; unsupported and reauth states remain explicit. Reads are
-serialized per lane and use only public OAR APIs.
+Each prompted turn gets a public `accountUsage` sample before the prompt and a
+second sample after its `turn_ended` event. A queued/spontaneous turn gets the
+same pair from its public `turn_started` boundary; steering an existing turn
+does not create a misleading second pair. The renderer keeps the raw result and
+derives label-matched window deltas, reset markers, burn rate, and a reset-aware
+time-to-limit projection. Unsupported, unavailable, reauth, and reader-error
+results remain visible as explicit states on the outcome row.
 
-To capture fixture-only shareable PNG/MP4 artifacts, run `pnpm run showcase`.
-Artifacts are written to `artifacts/showcase/`.
-
-Usage helm reads are serialized per lane. If a lane closes while a public usage promise is pending, close wins and an explicit error boundary is emitted when needed; disposal is never held hostage by quota observation. Renderer observe helpers use only the browser-safe `@botiverse/oar/observe` export, enforced by lint. Manual dogfood should compare each completed outcome's delta, burn rate, and reset projection with runtime readings, reporting unsupported usage explicitly.
+Reads are serialized per lane. If a lane closes while a public usage promise is
+pending, close wins the observation race and emits an explicit error boundary
+when needed; the underlying runtime promise is left to settle on its own, so
+quota observation cannot hold disposal hostage. The feature uses only public OAR
+`accountUsage`; browser observe helpers use `@botiverse/oar/observe`, and lint
+rejects every other OAR deep path.
