@@ -113,6 +113,17 @@ xvfb-run -a pnpm smoke
 The screenshot is written to `artifacts/coxswain-smoke.png`. CI runs the same
 sequence on Linux and uploads the screenshot as an artifact.
 
+To make shareable fixture-only artifacts (a PNG plus a short MP4 assembled
+from deterministic #smoke frames), run this outside the commit check:
+
+```sh
+pnpm run showcase
+```
+
+The command supplies Xvfb automatically when no display is present and writes
+to `artifacts/showcase/`. The showcase path never launches a runtime or reads
+account usage, and requires `ffmpeg` for MP4 encoding.
+
 `experiments/say-bridge.ts` is a manual, token-burning check that the `say`
 bridge delivers through the `OAR_SAY` indirection against a real runtime; run
 it with `pnpm tsx experiments/say-bridge.ts` and read its `OBSERVED` header.
