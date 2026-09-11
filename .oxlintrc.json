@@ -67,7 +67,21 @@
     "typescript/consistent-type-exports": "error",
     "eslint/id-length": "off",
     "eslint/no-inline-comments": "off",
-    "eslint/one-var": "off"
+    "eslint/one-var": "off",
+    "eslint/no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": [
+              "@botiverse/oar/**",
+              "!@botiverse/oar/observe"
+            ],
+            "message": "Import only from the public OAR package or observe export."
+          }
+        ]
+      }
+    ]
   },
   "overrides": [
     {

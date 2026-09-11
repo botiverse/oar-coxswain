@@ -113,6 +113,17 @@ xvfb-run -a pnpm smoke
 The screenshot is written to `artifacts/coxswain-smoke.png`. CI runs the same
 sequence on Linux and uploads the screenshot as an artifact.
 
+To make shareable fixture-only artifacts (a PNG plus a short MP4 assembled
+from deterministic `#smoke` frames), run this outside the commit check:
+
+```sh
+pnpm run showcase
+```
+
+The command supplies Xvfb automatically when no display is present and writes
+to `artifacts/showcase/`. The showcase path never launches a runtime or reads
+account usage, and requires `ffmpeg` for MP4 encoding.
+
 `experiments/say-bridge.ts` is a manual, token-burning check that the `say`
 bridge delivers through the `OAR_SAY` indirection against a real runtime; run
 it with `pnpm tsx experiments/say-bridge.ts` and read its `OBSERVED` header.
@@ -127,3 +138,22 @@ it with `pnpm tsx experiments/say-bridge.ts` and read its `OBSERVED` header.
 4. Verify that messages emitted with `say` appear in the conversation.
 5. Send another input while the turn runs and inspect its steered/queued marker.
 6. Watch the status lamp follow the OAR observer, then abort the turn.
+7. On a completed turn, inspect the outcome row's Usage motion line: compare the per-window delta, burn rate, and reset/projection note with runtime account-usage readings. A runtime that reports no usage should say so explicitly rather than showing a fabricated zero.
+
+## Usage helm first slice
+
+Each prompted turn gets a public `accountUsage` sample before the prompt and a
+second sample after its `turn_ended` event. A queued/spontaneous turn gets the
+same pair from its public `turn_started` boundary; steering an existing turn
+does not create a misleading second pair. The renderer keeps the raw result and
+derives label-matched window deltas, reset markers, burn rate, and a reset-aware
+time-to-limit projection. Unsupported, unavailable, reauth, and reader-error
+results remain visible as explicit states on the outcome row.
+
+Reads are serialized per lane. If a lane closes while a public usage promise is
+pending, close wins the observation race and emits an explicit error boundary
+when needed; the underlying runtime promise is left to settle on its own, so
+quota observation cannot hold disposal hostage. The feature uses only public OAR
+`accountUsage` capability; no runtime internals or credentials cross the renderer boundary. Renderer-side observe helpers use the documented browser-safe
+`@botiverse/oar/observe` export; the lint rule rejects every other OAR deep path
+and direct source import.
