@@ -141,6 +141,7 @@ against each window's reset.
   within a window, resets actually reset, `reauth_required` surfaces
   instead of garbage) — properties only observable across many reads.
 - **Landed first slice**: serialized public accountUsage reads with deltas, reset detection, burn rate, and conservative projections.
+- **Deferred**: session-level burn-rate dashboard and historical trend retention remain future slices; the current view stays tied to each turn outcome.
 
 ### 6. Drills — induced faults, promised behavior
 
@@ -165,7 +166,7 @@ a failure with the right class, dispose still completes cleanly).
   and land the voyage recorder's capture half. The implementation and capture
   location are documented in the [README](README.md).
 - **Milestone 2 — parallel tracks** (independent once M1 lands): Regatta
-  view (first slice landed) · Contract lens (first slice landed) · Usage helm.
+  view (first slice landed) · Contract lens (first slice landed) · Usage helm (first slice landed).
   Three lanes with no shared files beyond M1's host — suitable for concurrent
   tasks.
 - **Milestone 3 — the deep end**: voyage replay + export-to-test · session

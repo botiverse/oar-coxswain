@@ -72,8 +72,13 @@
       "error",
       {
         "patterns": [
-          "@botiverse/oar/src/**",
-          "@botiverse/oar/dist/**"
+          {
+            "group": [
+              "@botiverse/oar/**",
+              "!@botiverse/oar/observe"
+            ],
+            "message": "Import only from the public OAR package or observe export."
+          }
         ]
       }
     ]

@@ -17,7 +17,7 @@ const path = require("node:path");
 const { spawnSync } = require("node:child_process");
 
 const appDirectory = path.resolve(__dirname, "..");
-const repositoryDirectory = path.resolve(appDirectory, "..", "..");
+const repositoryDirectory = path.resolve(appDirectory, "..");
 const defaultOutputDirectory = path.join(appDirectory, "artifacts", "showcase");
 const outputDirectory = path.resolve(process.env.COXSWAIN_SHOWCASE_OUTPUT ?? defaultOutputDirectory);
 const frameDirectory = path.join(outputDirectory, "frames");

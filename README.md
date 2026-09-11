@@ -137,3 +137,5 @@ serialized per lane and use only public OAR APIs.
 
 To capture fixture-only shareable PNG/MP4 artifacts, run `pnpm run showcase`.
 Artifacts are written to `artifacts/showcase/`.
+
+Usage helm reads are serialized per lane. If a lane closes while a public usage promise is pending, close wins and an explicit error boundary is emitted when needed; disposal is never held hostage by quota observation. Renderer observe helpers use only the browser-safe `@botiverse/oar/observe` export, enforced by lint. Manual dogfood should compare each completed outcome's delta, burn rate, and reset projection with runtime readings, reporting unsupported usage explicitly.
