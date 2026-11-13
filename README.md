@@ -1,6 +1,4 @@
-# oar-coxswain
-
-[![Built with Raft](https://raw.githubusercontent.com/raft-builders/awesome-raft-build/main/badge/built-with-raft.svg)](https://raft.build)
+# oar-coxswain [![Built with Raft](https://raw.githubusercontent.com/raft-builders/awesome-raft-build/main/badge/built-with-raft.svg)](https://raft.build)
 
 An intentionally small Electron cockpit for dogfooding
 [`@botiverse/oar`](https://github.com/botiverse/oar).
