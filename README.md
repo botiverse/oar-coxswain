@@ -1,5 +1,7 @@
 # oar-coxswain
 
+[![Built with Raft](https://raw.githubusercontent.com/raft-builders/awesome-raft-build/main/badge/built-with-raft.svg)](https://raft.build)
+
 An intentionally small Electron cockpit for dogfooding
 [`@botiverse/oar`](https://github.com/botiverse/oar).
 Each window owns an `AgentHost` that can run one or more independent session
